@@ -63,6 +63,8 @@ Olilo's symmetrical speeds are perfect for streaming:
 
 ## Need Help?
 
-Contact our gaming specialists at support@olilo.co.uk or call 0800-OLILO-HELP
+- **Email:** support@olilo.co.uk
+- **Discord:** discord.gg/olilo
+- **Live Chat:** Available on our website
 
 Game on with Olilo! 🎮
