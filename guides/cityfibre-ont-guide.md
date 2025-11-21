@@ -140,11 +140,11 @@ This wipes all settings back to how it left the factory.
 ## Common ONT Models
 
 There are a few different models depending on your install:
-- Calix GP1007x
-- Calix GP1100X
-- Nokia XS-010X-Q
-- Calix GigaPoint 801Gv2
-- Calix GP1000g 
+- Calix GP1007x (XGS-PON)
+- Calix GP1100X (XGS-PON)
+- Nokia XS-010X-Q (XGS-PON)
+- Calix GigaPoint 801Gv2 (GPON)
+- Calix GP1000g (GPON)
 
 They all work the same way with similar lights.
 
