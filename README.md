@@ -57,11 +57,11 @@ Brief introduction...
 
 ### Style Guide
 
-**Email:** support@olilo.co.uk
-**Discord:** discord.gg/olilo
-**Live Chat:** Available on our website
-**Spelling:** UK English (fibre, optimise, colour, etc.)
-**Tone:** Friendly, helpful, concise
+**Email:** support@olilo.co.uk  
+**Discord:** discord.gg/olilo  
+**Live Chat:** Available on our website  
+**Spelling:** UK English (fibre, optimise, colour, etc.)  
+**Tone:** Friendly, helpful, concise  
 
 ### Need Help?
 
