@@ -67,7 +67,9 @@ add list=WAN interface=olilo-wan comment="Olilo CityFibre"
 
 ## Freedom Fibre (DHCP)
 
-This is the simplest case, no VLAN, no PPPoE. If you're on stock config, `ether1` already has a working DHCP client and WAN list membership, there's nothing to change. If you've since modified it, this restores the default:
+This is the simplest case, no VLAN, no PPPoE. If you're on stock config, `ether1` already has a working DHCP client and WAN list membership, there's nothing to change.
+
+If you've since modified it, this restores the default:
 
 ```routeros
 /ip dhcp-client
