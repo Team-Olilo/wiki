@@ -3,7 +3,7 @@ title: MikroTik RouterOS Internet Setup Guide
 description: Configuring your main WAN connection on MikroTik for Openreach, CityFibre, or Freedom Fibre
 category: Setup
 author: Aydan Abrahams
-lastUpdated: 09/07/2026
+lastUpdated: 14/08/2026
 ---
 
 # MikroTik RouterOS Internet Setup Guide
@@ -20,16 +20,22 @@ Check [Which Network Am I On?](./which-network-am-i-on.md) first, the three netw
 
 Stock config puts a DHCP client on `ether1`, remove it first, PPPoE replaces it.
 
+Olilo supports a 1500-byte MTU over PPPoE. Set the physical interface MTU to 1508 to leave room for the 8-byte PPPoE overhead.
+
 ```routeros
 # Remove the default DHCP client on ether1, Openreach uses PPPoE, not DHCP,
 # on the physical port
 /ip dhcp-client remove [find interface=ether1]
 
+# Allow a 1500-byte IP MTU plus the PPPoE overhead
+/interface ethernet
+set [find name=ether1] mtu=1508
+
 # Create the PPPoE client
 /interface pppoe-client
 add name=olilo-wan interface=ether1 user="your-pppoe-username" \
-    password="your-pppoe-password" add-default-route=yes \
-    use-peer-dns=no disabled=no
+    password="your-pppoe-password" max-mtu=1500 max-mru=1500 \
+    add-default-route=yes use-peer-dns=no disabled=no
 
 # Swap WAN list membership from ether1 to the PPPoE interface
 /interface list member
@@ -38,6 +44,19 @@ add list=WAN interface=olilo-wan comment="Olilo PPPoE"
 ```
 
 Your credentials are supplied by email after your order goes live, and are case-sensitive.
+
+### IPv6 at MTU 1492
+
+The MTU 1500 settings above are optional. Without them, PPPoE normally negotiates an MTU of 1492. RouterOS adjusts TCP MSS automatically for IPv4, but not IPv6. If you use IPv6 with an MTU of 1492, add this rule:
+
+```routeros
+/ipv6 firewall mangle
+add chain=forward action=change-mss new-mss=clamp-to-pmtu \
+    protocol=tcp tcp-flags=syn out-interface=olilo-wan \
+    comment="Olilo PPPoE: clamp IPv6 TCP MSS to PMTU"
+```
+
+Otherwise, you'll have connectivity issues when remote services send IPv6 packets sized for a 1500-byte path.
 
 ---
 
